@@ -1,0 +1,15 @@
+{
+  "name": "My new tract",
+  "locations": [
+    {
+      "timestamp":1000000000,
+      "corrds": {
+        "latitude":100,
+        "longitude":100,
+        "altitude":100,
+        "accuracy":100,
+        "speed":100
+      }
+    }
+  ]
+}
