@@ -52,4 +52,81 @@ Content-Type: application/json
   "email": "test10@test.com",
   "password": "123456"
 }
+###
+POST http://localhost:3000/signin
+Content-Type: application/json
 
+{
+  "email": "test1@test.com",
+  "password": "123456"
+}
+
+#####
+POST http://localhost:3000/userLevels
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjQxMjA4MDR9.Y83k_UPiiJdssVRfBoGGHuCu9HcuTcUN_Czf_NNGhdY
+Content-Type: application/json
+
+{
+"level": "1"
+}
+####
+POST http://localhost:3000/userLevels
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+"level": "2"
+}
+#####
+GET http://localhost:3000/userLevels
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjQxMjA4MDR9.Y83k_UPiiJdssVRfBoGGHuCu9HcuTcUN_Czf_NNGhdY
+Content-Type: application/json
+#####
+GET http://localhost:3000/userLevels
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+
+#####
+POST http://localhost:3000/activities
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "type": "Garmin",
+  "timestamp": "2022-09-29T23:41:04.000Z",
+  "distance": 1000,
+  "duration": 100,
+  "pace": "100m/2000"
+
+}
+#####
+PUT http://localhost:3000/activities
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "userId": "63305a6cb23965265b0578ef",
+  "type": "Garmin",
+  "timestamp": "2022-09-29T23:41:04.000Z",
+  "distance": 2000,
+  "duration": 100,
+  "pace": "100m/2000",
+  "_id": "633e8dc4417214a16515a86d",
+  "__v": 0
+}
+#####
+GET http://localhost:3000/activities?id=633e8dc4417214a16515a86d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "userId": "63305a6cb23965265b0578ef",
+  "type": "Garmin",
+  "timestamp": "2022-09-29T23:41:04.000Z",
+  "distance": 2000,
+  "duration": 100,
+  "pace": "100m/2000",
+  "_id": "633e8dc4417214a16515a86d",
+  "__v": 0
+}

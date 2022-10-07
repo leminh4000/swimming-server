@@ -1,10 +1,14 @@
 require("./models/User");
 require("./models/Track");
+require("./models/UserLevel");
+require("./models/Activity");
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const trackRoutes = require('./routes/trackRoutes');
+const userLevelRoutes = require('./routes/userLevelRoutes');
+const activityRoutes = require('./routes/activityRoutes');
 const requireAuth = require('./middlewares/requireAuth');
 
 const app = express();
@@ -12,6 +16,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
+app.use(userLevelRoutes);
+app.use(activityRoutes);
 
 const mongdoUri = 'mongodb+srv://admin:Aa123456!@cluster0.msahwgu.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongdoUri, {
