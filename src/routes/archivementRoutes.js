@@ -2,38 +2,36 @@ const express = require('express');
 const mongoose = require('mongoose');
 const requireAuth = require('../middlewares/requireAuth');
 
-const Activity = mongoose.model('Activity');
+const Archivement = mongoose.model('Archivement');
 
 const router = express.Router();
 
 router.use(requireAuth);
 
-router.get('/activities', async (req, res) => {
-    const activities = await Activity.find({userId: req.user._id}).sort( {"timestamp" : -1} ).limit(4);
-    console.log(activities);
-    res.send(activities);
+router.get('/archivements', async (req, res) => {
+    const archivements = await Archivement.find({userId: req.user._id});
+
+    res.send(archivements);
 });
-router.get('/activities', async (req, res) => {
+router.get('/archivements', async (req, res) => {
     const id = req.params.id;
-    const activities = await Activity.find({userId: req.user._id}).limit(1);
+    const archivements = await Archivement.find({userId: req.user._id});
 
-    res.send(activities);
+    res.send(archivements);
 
-    Activity.findById(id)
+    Archivement.findById(id)
         .then(data => {
-            if (!data)
-                res.status(422).send({ message: "Not found Activity with id " + id });
-            else res.send(data);
+            if (!data) res.status(422).send({message: "Not found Archivement with id " + id}); else res.send(data);
         })
         .catch(err => {
             res
                 .status(422)
-                .send({ message: "Error retrieving Activity with id=" + id });
+                .send({message: "Error retrieving Archivement with id=" + id});
         });
 });
 
 
-router.post('/activities', async (req, res) => {
+router.post('/archivements', async (req, res) => {
     console.log('req.body', req.body);
     const {
         type
@@ -45,19 +43,19 @@ router.post('/activities', async (req, res) => {
     }
 
     try {
-        const activity = new Activity({
+        const archivement = new Archivement({
             ...req.body,
             userId: req.user._id
         });
-        await activity.save();
-        res.send(activity);
+        await archivement.save();
+        res.send(archivement);
     } catch (err) {
         console.error("ERROR", err.message);
         res.status(422).send({error: err.message});
     }
 });
 
-router.put('/activities', async (req, res) => {
+router.put('/archivements', async (req, res) => {
     console.log('req.body', req.body);
 
     if (!req.body) {
@@ -65,17 +63,17 @@ router.put('/activities', async (req, res) => {
     }
 
     const {_id} = req.body;
-    Activity.findByIdAndUpdate(_id, req.body, {useFindAndModify: false})
+    Archivement.findByIdAndUpdate(_id, req.body, {useFindAndModify: false})
         .then(data => {
             if (!data) {
                 res.status(422).send({
-                    message: `Cannot update Activity with id=${_id}. Maybe Activity was not found!`
+                    message: `Cannot update Archivement with id=${_id}. Maybe Archivement was not found!`
                 });
-            } else res.send({message: "Activity was updated successfully."});
+            } else res.send({message: "Archivement was updated successfully."});
         })
         .catch(err => {
             res.status(422).send({
-                message: "Error updating Activity with id=" + _id
+                message: "Error updating Archivement with id=" + _id
             });
         });
 });

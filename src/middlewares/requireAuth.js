@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
 
         const {userId} = payload;
         const user = await User.findById(userId);
-        console.log('user', user);
+        // console.log('user', user);
         req.user = user;
         next();
     });
