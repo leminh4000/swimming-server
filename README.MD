@@ -28,3 +28,6 @@ curl -d '{
 }
 ]
 }'  -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjQxMjA4MDR9.Y83k_UPiiJdssVRfBoGGHuCu9HcuTcUN_Czf_NNGhdY" -X POST http://localhost:3000/tracts
+
+Huong dan chay
+node src/index.js
