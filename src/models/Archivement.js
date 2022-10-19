@@ -4,13 +4,20 @@ const mongoose = require('mongoose');
 const archivementSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref : 'User',
     },
-    type: {
-        type: String,
+    category  : {
+        type   : String,
         default: '',
-    },value: {
-        type: Number,
+    },
+    type  : {
+        type   : String,
+        default: '',
+        unique: true,
+        required: true,
+    },
+    value : {
+        type   : Number,
         default: null,
     },
 });

@@ -1,47 +1,3 @@
-# curl -d '{
-#"name": "My new tract",
-#"locations": [
-#{
-#"timestamp":1000000000,
-#"corrds": {
-#"latitude":100,
-#"longitude":100,
-#"altitude":100,
-#"accuracy":100,
-#"speed":100
-#}
-#}
-#]
-#}'  -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjQxMjA4MDR9.Y83k_UPiiJdssVRfBoGGHuCu9HcuTcUN_Czf_NNGhdY" -X POST http://localhost:3000/tracts
-POST http://localhost:3000/tracts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjQxMjA4MDR9.Y83k_UPiiJdssVRfBoGGHuCu9HcuTcUN_Czf_NNGhdY
-Content-Type: application/json
-
-{
-  "name": "My new tract",
-  "locations": [
-    {
-      "timestamp": 1000000000,
-      "coords": {
-        "latitude": 100,
-        "longitude": 100,
-        "altitude": 100,
-        "accuracy": 100,
-        "speed": 100
-      }
-    }
-  ]
-}
-
-<> 2022-09-26T101116.200.json
-
-###
-
-GET http://localhost:3000/tracts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjQxMjA4MDR9.Y83k_UPiiJdssVRfBoGGHuCu9HcuTcUN_Czf_NNGhdY
-Content-Type: application/json
-
-<> 2022-09-26T100843.200.json
 
 
 ###
@@ -101,6 +57,11 @@ Content-Type: application/json
 
 
 #####
+GET http://localhost:3000/activitiesSummary?from=2022-10-04T23:38:58.000Z&to=2022-10-06T23:38:58.000Z
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjUzOTYwNTZ9.9A0puGqbiomHH7f16JlmHzYJ7rOVI1kom9CqOMpYVn8
+Content-Type: application/json
+
+#####
 PUT http://localhost:3000/activities
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
@@ -117,7 +78,7 @@ Content-Type: application/json
 }
 
 #####
-GET http://localhost:3000/activities?id=633fe8dd0b2ff2e88eabbdea
+GET http://localhost:3000/activities2?id=63464420eef475ac5d99ce88
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
 #####
@@ -13486,11 +13447,89 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwN
 Content-Type: application/json
 
 {
-  "type": "1000 m",
-  "value": 400
+  "category": "speed",
+  "type": "1000m",
+  "value": 1200
 }
+#####
+POST http://localhost:3000/archivements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "category": "speed",
+  "type": "100 m",
+  "value": 70
+}
+#####
+POST http://localhost:3000/archivements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "category": "speed",
+  "type": "400 m",
+  "value": 420
+}
+#####
+POST http://localhost:3000/archivements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "category": "speed",
+  "type": "750 m",
+  "value": 900
+}
+#####
+POST http://localhost:3000/archivements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "category": "distance",
+  "type": "Longest",
+  "value": 5000
+}
+#####
+POST http://localhost:3000/archivements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "category": "medal",
+  "type": "level",
+  "value": 0
+}
+#####
+POST http://localhost:3000/archivements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+
+{
+  "category": "total",
+  "type": "total",
+  "value": 10000
+}
+
 
 #####
 GET http://localhost:3000/archivements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+#####
+GET http://localhost:3000/archivements2?id=634fb1980953d1b5718ad32d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+#####
+GET http://localhost:3000/archivements2?type=100%20m
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+#####
+GET http://localhost:3000/archivements2?category=speed
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json
+#####
+GET http://localhost:3000/archivements2?category=total
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
