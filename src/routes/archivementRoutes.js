@@ -35,6 +35,7 @@ router.get('/archivements2', async (req, res) => {
         console.log("archivements",archivements);
         res.send(archivements);
     } else if (req.query.category) {
+        console.log("req.user._id",req.user._id);
         archivements =  await Archivement.find({
             userId  : req.user._id,
             category: req.query.category

@@ -13533,3 +13533,7 @@ Content-Type: application/json
 GET http://localhost:3000/archivements2?category=total
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
+#####
+GET http://localhost:3000/archivements2?category=distance
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
+Content-Type: application/json

@@ -10,7 +10,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get('/activitiesSummary', async (req, res) => {
-    console.log('req.query', req.query);
+    // console.log('req.query', req.query);
     const from = new Date(req.query.from);
     const to = new Date(req.query.to);
     const activities = await Activity.find({
@@ -49,7 +49,7 @@ router.get('/activitiesSummary', async (req, res) => {
 });
 router.get('/activities', async (req, res) => {
     const activities = await Activity.find({userId: req.user._id}).sort({"timestamp": -1}).limit(4);
-    console.log(activities);
+    // console.log(activities);
     res.send(activities);
 });
 router.get('/activities2', async (req, res) => {
@@ -72,7 +72,7 @@ router.get('/activities2', async (req, res) => {
 
 async function updateArchivement(req, activity) {
     let archivementTotal = await Archivement.findOne({type: "total"});
-    console.log("archivement", archivementTotal);
+    // console.log("archivement", archivementTotal);
     if (!archivementTotal) {
         archivementTotal = new Archivement({
             category: "total",
@@ -84,7 +84,7 @@ async function updateArchivement(req, activity) {
     await archivementTotal.save();
 
     let archivementLevel = await Archivement.findOne({type: "level"});
-    console.log("archivementLevel", archivementLevel);
+    // console.log("archivementLevel", archivementLevel);
     if (!archivementLevel) {
         archivementLevel = new Archivement({
             category: "medal",
@@ -111,7 +111,7 @@ async function updateArchivement(req, activity) {
     archivementLevel.save();
 
     let archivementLongest = await Archivement.findOne({type: "Longest"});
-    console.log("archivementLongest", archivementLongest);
+    // console.log("archivementLongest", archivementLongest);
     if (!archivementLongest) {
         archivementLongest = new Archivement({
             category: "distance",
@@ -127,11 +127,11 @@ async function updateArchivement(req, activity) {
 }
 
 router.post('/activities', async (req, res) => {
-    console.log('req.body', req.body);
+    // console.log('req.body', req.body);
     const {
         type
     } = req.body;
-    console.log('type', type);
+    // console.log('type', type);
 
     if (!type) {
         return res.status(422).send({error: 'You must provide a type'})
@@ -153,7 +153,7 @@ router.post('/activities', async (req, res) => {
 });
 
 router.put('/activities', async (req, res) => {
-    console.log('req.body', req.body);
+    // console.log('req.body', req.body);
 
     if (!req.body) {
         return res.status(422).send({error: 'Data to update can not be empty!'})
