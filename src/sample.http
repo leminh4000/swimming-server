@@ -8,6 +8,7 @@ Content-Type: application/json
   "email": "test10@test.com",
   "password": "123456"
 }
+
 ###
 POST http://localhost:3000/signup
 Content-Type: application/json
@@ -57,9 +58,14 @@ Content-Type: application/json
 
 
 #####
-GET http://localhost:3000/activitiesSummary?from=2022-10-04T23:38:58.000Z&to=2022-10-06T23:38:58.000Z
+GET http://localhost:3000/activitiesSummary?from=2022-10-04T23:38:58.000Z
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjUzOTYwNTZ9.9A0puGqbiomHH7f16JlmHzYJ7rOVI1kom9CqOMpYVn8
 Content-Type: application/json
+#####
+GET http://localhost:3000/activities2?from=2022-10-04T23:38:58.000Z
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjUzOTYwNTZ9.9A0puGqbiomHH7f16JlmHzYJ7rOVI1kom9CqOMpYVn8
+Content-Type: application/json
+
 
 #####
 PUT http://localhost:3000/activities
@@ -81,6 +87,7 @@ Content-Type: application/json
 GET http://localhost:3000/activities2?id=63464420eef475ac5d99ce88
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
+
 #####
 GET http://localhost:3000/activities
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjUzOTYwNTZ9.9A0puGqbiomHH7f16JlmHzYJ7rOVI1kom9CqOMpYVn8
@@ -13451,6 +13458,7 @@ Content-Type: application/json
   "type": "1000m",
   "value": 1200
 }
+
 #####
 POST http://localhost:3000/archivements
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
@@ -13461,6 +13469,7 @@ Content-Type: application/json
   "type": "100 m",
   "value": 70
 }
+
 #####
 POST http://localhost:3000/archivements
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
@@ -13471,6 +13480,7 @@ Content-Type: application/json
   "type": "400 m",
   "value": 420
 }
+
 #####
 POST http://localhost:3000/archivements
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
@@ -13481,6 +13491,7 @@ Content-Type: application/json
   "type": "750 m",
   "value": 900
 }
+
 #####
 POST http://localhost:3000/archivements
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
@@ -13491,6 +13502,7 @@ Content-Type: application/json
   "type": "Longest",
   "value": 5000
 }
+
 #####
 POST http://localhost:3000/archivements
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
@@ -13501,6 +13513,7 @@ Content-Type: application/json
   "type": "level",
   "value": 0
 }
+
 #####
 POST http://localhost:3000/archivements
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
@@ -13517,22 +13530,27 @@ Content-Type: application/json
 GET http://localhost:3000/archivements
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
+
 #####
 GET http://localhost:3000/archivements2?id=634fb1980953d1b5718ad32d
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
+
 #####
 GET http://localhost:3000/archivements2?type=100%20m
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
+
 #####
 GET http://localhost:3000/archivements2?category=speed
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
+
 #####
 GET http://localhost:3000/archivements2?category=total
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
 Content-Type: application/json
+
 #####
 GET http://localhost:3000/archivements2?category=distance
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNWE2Y2IyMzk2NTI2NWIwNTc4ZWYiLCJpYXQiOjE2NjUwMjI0OTN9.hV4VWm0hZAjmASeYIJ9F0DqV37aQJ8g3cW3hHQVlxAI
