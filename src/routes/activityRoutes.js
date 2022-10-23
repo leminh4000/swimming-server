@@ -102,9 +102,12 @@ router.post('/activities', async (req, res) => {
             userId: req.user._id
         });
         await activity.save();
-        await updateArchivement(req, activity);
+        const newLevel = await updateArchivement(req, activity);
+        console.log("newLevel", newLevel)
 
-        res.send(activity);
+        activity.leve
+        res.send({activity, newLevel});
+        // res.send({activity});
     } catch (err) {
         console.error("ERROR", err.message);
         res.status(422).send({error: err.message});
@@ -200,6 +203,7 @@ async function updateLongestArchivement(req, activity) {
 async function updateLevelArchivement(req, archivementTotal) {
     //update archivements level
     let archivementLevel = await Archivement.findOne({type: "level"});
+    const oldLevel = archivementLevel.value;
     // console.log("archivementLevel", archivementLevel);
     if (!archivementLevel) {
         archivementLevel = new Archivement({
@@ -211,20 +215,26 @@ async function updateLevelArchivement(req, archivementTotal) {
     }
 
     switch (true) {
-        case archivementTotal.value >= 150:
+        case archivementTotal.value >= 150000:
             archivementLevel.value = 4;
             break;
-        case archivementTotal.value >= 100:
+        case archivementTotal.value >= 100000:
             archivementLevel.value = 3;
             break;
-        case archivementTotal.value >= 50:
+        case archivementTotal.value >= 50000:
             archivementLevel.value = 2;
             break;
-        case archivementTotal.value >= 20:
+        case archivementTotal.value >= 0: /*test 20000:*/
             archivementLevel.value = 1;
             break;
     }
     archivementLevel.save();
+    if (archivementLevel.value !== oldLevel) {
+        return archivementLevel.value;
+    } else {
+        return 0;
+    }
+
 }
 
 async function updateTotalArchivement(req, activity) {
@@ -246,13 +256,15 @@ async function updateTotalArchivement(req, activity) {
 async function updateArchivement(req, activity) {
     let archivementTotal = await updateTotalArchivement(req, activity);
 
-    await updateLevelArchivement(req, archivementTotal);
+    const newLevel=await updateLevelArchivement(req, archivementTotal);
+    console.log("newLevel", newLevel)
 
     await updateLongestArchivement(req, activity);
 
     await updateSpeedArchivement(req, activity,100);
     await updateSpeedArchivement(req, activity,400);
     await updateSpeedArchivement(req, activity, 750);
+    return newLevel;
 
 
 }
