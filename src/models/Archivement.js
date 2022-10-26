@@ -13,7 +13,6 @@ const archivementSchema = new mongoose.Schema({
     type  : {
         type   : String,
         default: '',
-        unique: true,
         required: true,
     },
     value : {

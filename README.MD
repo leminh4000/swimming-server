@@ -31,3 +31,9 @@ curl -d '{
 
 Huong dan chay
 node src/index.js
+nodemon src/index.js
+
+public api:
+npm install -g localtunnel
+lt --port 8000
+append endpoint to file api/swimApi.js

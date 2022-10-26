@@ -18,13 +18,29 @@ router.get('/activitiesSummary', async (req, res) => {
             $gte: from,
         }
     });
-    console.log(activities);
     const sessions = [];
     const avg_heart_rates = [];
     const enhanced_avg_speeds = [];
     const total_caloriesArray = [];
     const total_distances = [];
     const total_timer_times = [];
+    let avg_heart_rate=0;
+    let enhanced_avg_speed='';
+    let total_calories='';
+    let total_timer_time='';
+    let total_distance='';
+
+    if (activities.length === 0){
+        res.send({
+            avg_heart_rate,
+            enhanced_avg_speed,
+            total_calories,
+            total_distance,
+            total_timer_time,
+        });
+        return;
+    }
+
     const pool_length = activities[0].sessions[0].pool_length;
 
     for (const activity of activities) {
@@ -36,11 +52,11 @@ router.get('/activitiesSummary', async (req, res) => {
         total_timer_times.push(session.total_timer_time);
     }
 
-    const avg_heart_rate = parseInt(avg_heart_rates.reduce((a, b) => a + b, 0) / avg_heart_rates.length) + " bpm";
-    const enhanced_avg_speed = Math.floor(((enhanced_avg_speeds.reduce((a, b) => a + b, 0) / enhanced_avg_speeds.length) * pool_length) / 60) + "p:" + pool_length + "m";
-    const total_calories = total_caloriesArray.reduce((a, b) => a + b, 0) + " calories";
-    const total_distance = (total_distances.reduce((a, b) => a + b, 0) / 1000).toFixed(3) + " km";
-    const total_timer_time = new Date(total_timer_times.reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 5) + " phút";
+    avg_heart_rate = parseInt(avg_heart_rates.reduce((a, b) => a + b, 0) / avg_heart_rates.length) + " bpm";
+    enhanced_avg_speed = Math.floor(((enhanced_avg_speeds.reduce((a, b) => a + b, 0) / enhanced_avg_speeds.length) * pool_length) / 60) + "p:" + pool_length + "m";
+    total_calories = total_caloriesArray.reduce((a, b) => a + b, 0) + " calories";
+    total_distance = (total_distances.reduce((a, b) => a + b, 0) / 1000).toFixed(3) + " km";
+    total_timer_time = new Date(total_timer_times.reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 5) + " phút";
 
 
     res.send({
@@ -48,7 +64,7 @@ router.get('/activitiesSummary', async (req, res) => {
         enhanced_avg_speed,
         total_calories,
         total_distance,
-        total_timer_time
+        total_timer_time,
     });
 });
 router.get('/activities', async (req, res) => {
@@ -62,9 +78,6 @@ router.get('/activities/last', async (req, res) => {
     res.send(activities);
 });
 router.get('/activities2', async (req, res) => {
-    console.log("req.query", req.query);
-    console.log("req.user._id", req.user._id);
-
     if (req.query.id){
         Activity.findById(req.query.id)
         .then(data => {
@@ -77,25 +90,24 @@ router.get('/activities2', async (req, res) => {
         });
     } else if (req.query.from){
         const from = new Date(req.query.from);
-        console.log("from", from);
-        const activities = await Activity.find({
+        let filter = {
             userId   : req.user._id,
             timestamp: {
                 $gte: from,
             }
-        });
-        console.log("ctivities.length",activities.length);
+        };
+        const activities = await Activity.find(filter);
+        console.log(activities.length,"activities.length");
+        console.log(filter,"filter");
         return res.send(activities);
     }
     return res.status(422).send({error: 'Wrong params'});
 });
 
 router.post('/activities', async (req, res) => {
-    // console.log('req.body', req.body);
     const {
         type
     } = req.body;
-    // console.log('type', type);
 
     if (!type) {
         return res.status(422).send({error: 'You must provide a type'})
@@ -108,9 +120,7 @@ router.post('/activities', async (req, res) => {
         });
         await activity.save();
         const newLevel = await updateArchivement(req, activity);
-        console.log("newLevel", newLevel)
 
-        activity.leve
         res.send({activity, newLevel});
         // res.send({activity});
     } catch (err) {
@@ -127,7 +137,7 @@ router.put('/activities', async (req, res) => {
     }
 
     const {_id} = req.body;
-    Activity.findByIdAndUpdate(_id, req.body, {useFindAndModify: false})
+    Activity.findByIdAndUpdate(_id, req.body, {useFindAndModify: false,userId  : req.user._id,})
         .then(data => {
             if (!data) {
                 res.status(422).send({
@@ -146,7 +156,7 @@ router.put('/activities', async (req, res) => {
 async function updateSpeedArchivement(req, activity, speedArchivementLength) {
     //update archivements speed
 
-    let archivementSpeed = await Archivement.findOne({type: `${speedArchivementLength} m`});
+    let archivementSpeed = await Archivement.findOne({type: `${speedArchivementLength} m`,userId  : req.user._id,});
     if (!archivementSpeed) {
         archivementSpeed = new Archivement({
             category: "speed",
@@ -189,7 +199,7 @@ async function updateSpeedArchivement(req, activity, speedArchivementLength) {
 
 async function updateLongestArchivement(req, activity) {
     //update archivements longest
-    let archivementLongest = await Archivement.findOne({type: "Longest"});
+    let archivementLongest = await Archivement.findOne({type: "Longest",userId  : req.user._id,});
     // console.log("archivementLongest", archivementLongest);
     if (!archivementLongest) {
         archivementLongest = new Archivement({
@@ -207,9 +217,7 @@ async function updateLongestArchivement(req, activity) {
 
 async function updateLevelArchivement(req, archivementTotal) {
     //update archivements level
-    let archivementLevel = await Archivement.findOne({type: "level"});
-    const oldLevel = archivementLevel.value;
-    // console.log("archivementLevel", archivementLevel);
+    let archivementLevel = await Archivement.findOne({type: "level",userId  : req.user._id,});
     if (!archivementLevel) {
         archivementLevel = new Archivement({
             category: "medal",
@@ -218,6 +226,7 @@ async function updateLevelArchivement(req, archivementTotal) {
             userId  : req.user._id
         });
     }
+    const oldLevel = archivementLevel.value;
 
     switch (true) {
         case archivementTotal.value >= 150000:
@@ -244,12 +253,13 @@ async function updateLevelArchivement(req, archivementTotal) {
 
 async function updateTotalArchivement(req, activity) {
     //update archivements total
-    let archivementTotal = await Archivement.findOne({type: "total"});
-    // console.log("archivement", archivementTotal);
+    let archivementTotal = await Archivement.findOne({type: "total",userId  : req.user._id,});
+
     if (!archivementTotal) {
         archivementTotal = new Archivement({
             category: "total",
             type    : "total",
+            value: 0,
             userId  : req.user._id
         });
     }
@@ -260,15 +270,22 @@ async function updateTotalArchivement(req, activity) {
 
 async function updateArchivement(req, activity) {
     let archivementTotal = await updateTotalArchivement(req, activity);
+    console.log("archivementTotal done");
 
     const newLevel=await updateLevelArchivement(req, archivementTotal);
-    console.log("newLevel", newLevel)
+    console.log("updateLevelArchivement done");
 
     await updateLongestArchivement(req, activity);
 
     await updateSpeedArchivement(req, activity,100);
+    console.log("updateSpeedArchivement done");
+
     await updateSpeedArchivement(req, activity,400);
+    console.log("updateSpeedArchivement done");
+
     await updateSpeedArchivement(req, activity, 750);
+    console.log("updateSpeedArchivement done");
+
     return newLevel;
 
 
