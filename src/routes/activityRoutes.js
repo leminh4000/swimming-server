@@ -36,10 +36,10 @@ router.get('/activitiesSummary', async (req, res) => {
         total_timer_times.push(session.total_timer_time);
     }
 
-    const avg_heart_rate = avg_heart_rates.reduce((a, b) => a + b, 0) / avg_heart_rates.length + " bpm";
+    const avg_heart_rate = parseInt(avg_heart_rates.reduce((a, b) => a + b, 0) / avg_heart_rates.length) + " bpm";
     const enhanced_avg_speed = Math.floor(((enhanced_avg_speeds.reduce((a, b) => a + b, 0) / enhanced_avg_speeds.length) * pool_length) / 60) + "p:" + pool_length + "m";
     const total_calories = total_caloriesArray.reduce((a, b) => a + b, 0) + " calories";
-    const total_distance = total_distances.reduce((a, b) => a + b, 0) / 1000 + " km";
+    const total_distance = (total_distances.reduce((a, b) => a + b, 0) / 1000).toFixed(3) + " km";
     const total_timer_time = new Date(total_timer_times.reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 5) + " phút";
 
 
@@ -53,6 +53,11 @@ router.get('/activitiesSummary', async (req, res) => {
 });
 router.get('/activities', async (req, res) => {
     const activities = await Activity.find({userId: req.user._id}).sort({"timestamp": -1}).limit(4);
+    // console.log(activities);
+    res.send(activities);
+});
+router.get('/activities/last', async (req, res) => {
+    const activities = await Activity.find({userId: req.user._id}).sort({"timestamp": -1}).limit(1);
     // console.log(activities);
     res.send(activities);
 });
