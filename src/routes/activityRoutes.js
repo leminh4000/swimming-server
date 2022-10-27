@@ -238,7 +238,7 @@ async function updateLevelArchivement(req, archivementTotal) {
         case archivementTotal.value >= 50000:
             archivementLevel.value = 2;
             break;
-        case archivementTotal.value >= 0: /*test 20000:*/
+        case archivementTotal.value >= 20000:
             archivementLevel.value = 1;
             break;
     }
