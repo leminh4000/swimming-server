@@ -8,6 +8,7 @@ const Archivement = mongoose.model('Archivement');
 const router = express.Router();
 
 router.use(requireAuth);
+const seconds2mmss = seconds => new Date(seconds * 1000).toISOString().substring(14, 19);
 
 router.get('/activitiesSummary', async (req, res) => {
     // console.log('req.query', req.query);
@@ -53,10 +54,12 @@ router.get('/activitiesSummary', async (req, res) => {
     }
 
     avg_heart_rate = parseInt(avg_heart_rates.reduce((a, b) => a + b, 0) / avg_heart_rates.length) + " bpm";
-    enhanced_avg_speed = Math.floor(((enhanced_avg_speeds.reduce((a, b) => a + b, 0) / enhanced_avg_speeds.length) * pool_length) / 60) + "p:" + pool_length + "m";
+    // enhanced_avg_speed = Math.floor(((enhanced_avg_speeds.reduce((a, b) => a + b, 0) / enhanced_avg_speeds.length) * pool_length) / 60) + "p:" + pool_length + "m";
+    enhanced_avg_speed = seconds2mmss(Math.floor((total_timer_times.reduce((a, b) => a + b, 0)/total_timer_times.length))) + "p/" + pool_length + "m";
     total_calories = total_caloriesArray.reduce((a, b) => a + b, 0) + " calories";
-    total_distance = (total_distances.reduce((a, b) => a + b, 0) / 1000).toFixed(3) + " km";
-    total_timer_time = new Date(total_timer_times.reduce((a, b) => a + b, 0) * 1000).toISOString().substr(11, 5) + " phút";
+    const totalInKm = total_distances.reduce((a, b) => a + b, 0);
+    total_distance = (totalInKm) + " km";
+    total_timer_time = seconds2mmss(total_timer_times) + " phút";
 
 
     res.send({
@@ -80,14 +83,14 @@ router.get('/activities/last', async (req, res) => {
 router.get('/activities2', async (req, res) => {
     if (req.query.id){
         Activity.findById(req.query.id)
-        .then(data => {
-            if (!data) res.status(422).send({message: "Not found Activity with id " + req.query.id}); else res.send(data);
-        })
-        .catch(err => {
-            res
-                .status(422)
-                .send({message: "Error retrieving Activity with id=" + req.query.id});
-        });
+            .then(data => {
+                if (!data) res.status(422).send({message: "Not found Activity with id " + req.query.id}); else res.send(data);
+            })
+            .catch(err => {
+                res
+                    .status(422)
+                    .send({message: "Error retrieving Activity with id=" + req.query.id});
+            });
     } else if (req.query.from){
         const from = new Date(req.query.from);
         let filter = {
@@ -152,6 +155,10 @@ router.put('/activities', async (req, res) => {
         });
 });
 
+
+function newFunction(total_timer_times) {
+    return new Date(total_timer_times.reduce((a, b) => a + b, 0) * 1000).toISOString().substring(14, 19);
+}
 
 async function updateSpeedArchivement(req, activity, speedArchivementLength) {
     //update archivements speed
