@@ -54,12 +54,14 @@ router.get('/activitiesSummary', async (req, res) => {
     }
 
     avg_heart_rate = parseInt(avg_heart_rates.reduce((a, b) => a + b, 0) / avg_heart_rates.length) + " bpm";
+    const totalTimer= total_timer_times.reduce((a, b) => a + b, 0);
+    const avgTimer = Math.floor(totalTimer / total_timer_times.length);
     // enhanced_avg_speed = Math.floor(((enhanced_avg_speeds.reduce((a, b) => a + b, 0) / enhanced_avg_speeds.length) * pool_length) / 60) + "p:" + pool_length + "m";
-    enhanced_avg_speed = seconds2mmss(Math.floor((total_timer_times.reduce((a, b) => a + b, 0)/total_timer_times.length))) + "p/" + pool_length + "m";
+    enhanced_avg_speed = seconds2mmss(avgTimer) + "p/" + pool_length + "m";
     total_calories = total_caloriesArray.reduce((a, b) => a + b, 0) + " calories";
     const totalInKm = total_distances.reduce((a, b) => a + b, 0);
     total_distance = (totalInKm) + " km";
-    total_timer_time = seconds2mmss(total_timer_times) + " phút";
+    total_timer_time = seconds2mmss(total_timer_times.reduce((a, b) => a + b)) + " phút";
 
 
     res.send({
