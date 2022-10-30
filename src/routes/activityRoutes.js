@@ -101,7 +101,7 @@ router.get('/activities2', async (req, res) => {
                 $gte: from,
             }
         };
-        const activities = await Activity.find(filter);
+        const activities = await Activity.find(filter).sort({"timestamp": -1});
         console.log(activities.length,"activities.length");
         console.log(filter,"filter");
         return res.send(activities);
