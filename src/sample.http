@@ -28,6 +28,15 @@ Content-Type: application/json
   "password": "123456"
 }
 
+###
+POST http://goswim.fun/signin
+Content-Type: application/json
+
+{
+  "username": "test",
+  "password": "123456"
+}
+
 #####
 POST http://localhost:3000/userLevels
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzMwNTlkZWIyMzk2NTI2NWIwNTc4ZWEiLCJpYXQiOjE2NjQxMjA4MDR9.Y83k_UPiiJdssVRfBoGGHuCu9HcuTcUN_Czf_NNGhdY

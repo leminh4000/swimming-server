@@ -21,10 +21,6 @@ router.post('/userLevels', async (req, res) => {
     console.log('level', level);
 
 
-    if (!level) {
-        return res.status(422).send({error: 'You must provide a level'})
-    }
-
     try {
         const userLevel = new UserLevel({level, userId: req.user._id});
         await userLevel.save();
