@@ -60,7 +60,7 @@ router.get('/activitiesSummary', async (req, res) => {
     enhanced_avg_speed = seconds2mmss(avgTimer) + "p/" + pool_length + "m";
     total_calories = total_caloriesArray.reduce((a, b) => a + b, 0) + " calories";
     const totalInKm = total_distances.reduce((a, b) => a + b, 0);
-    total_distance = (totalInKm) + " km";
+    total_distance = (totalInKm).toFixed(3) + " km";
     total_timer_time = seconds2mmss(total_timer_times.reduce((a, b) => a + b)) + " phút";
 
 
