@@ -24,7 +24,7 @@ router.get('/activitiesSummary', async (req, res) => {
     const enhanced_avg_speeds = [];
     const total_caloriesArray = [];
     const total_distances = [];
-    const total_timer_times = [];
+    const total_timer_timesByLap = [];
     let avg_heart_rate=0;
     let enhanced_avg_speed='';
     let total_calories='';
@@ -50,18 +50,25 @@ router.get('/activitiesSummary', async (req, res) => {
         enhanced_avg_speeds.push(session.enhanced_avg_speed);
         total_caloriesArray.push(session.total_calories);
         total_distances.push(session.total_distance);
-        total_timer_times.push(session.total_timer_time);
+        for (const lap of session.laps){
+            total_timer_timesByLap.push(lap.total_timer_time);
+        }
     }
 
     avg_heart_rate = parseInt(avg_heart_rates.reduce((a, b) => a + b, 0) / avg_heart_rates.length) + " bpm";
-    const totalTimer= total_timer_times.reduce((a, b) => a + b, 0);
-    const avgTimer = Math.floor(totalTimer / total_timer_times.length);
-    // enhanced_avg_speed = Math.floor(((enhanced_avg_speeds.reduce((a, b) => a + b, 0) / enhanced_avg_speeds.length) * pool_length) / 60) + "p:" + pool_length + "m";
-    enhanced_avg_speed = seconds2mmss(avgTimer) + "p/" + pool_length + "m";
+    const totalTimeBySecs=  total_timer_timesByLap.reduce((a, b) => a + b, 0);
+    console.log("totalTimeBySecs", totalTimeBySecs);
+    console.log("total_timer_timesByLap", total_timer_timesByLap);
+
+
+
     total_calories = total_caloriesArray.reduce((a, b) => a + b, 0) + " calories";
     const totalInKm = total_distances.reduce((a, b) => a + b, 0);
     total_distance = (totalInKm).toFixed(3) + " km";
-    total_timer_time = seconds2mmss(total_timer_times.reduce((a, b) => a + b)) + " phút";
+    console.log("total_distances", total_distances);
+
+    enhanced_avg_speed = seconds2mmss(totalTimeBySecs*pool_length/(totalInKm*1000)) + "p/" + pool_length + "m";
+    total_timer_time = seconds2mmss(total_timer_timesByLap.reduce((a, b) => a + b)) + " phút";
 
 
     res.send({
